@@ -1,0 +1,203 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Chocolate Brown Palette - Light mode is warm & luxurious */
+    --background: 0.97 0.01 80;
+    --foreground: 0.22 0.04 40;
+
+    --card: 0.95 0.015 75;
+    --card-foreground: 0.22 0.04 40;
+
+    --popover: 0.97 0.01 80;
+    --popover-foreground: 0.22 0.04 40;
+
+    /* Rich chocolate brown */
+    --primary: 0.38 0.07 45;
+    --primary-foreground: 0.97 0.01 80;
+
+    /* Warm cream secondary */
+    --secondary: 0.93 0.025 80;
+    --secondary-foreground: 0.38 0.07 45;
+
+    --muted: 0.91 0.02 75;
+    --muted-foreground: 0.52 0.04 50;
+
+    /* Golden amber accent */
+    --accent: 0.72 0.12 65;
+    --accent-foreground: 0.22 0.04 40;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.97 0.01 80;
+
+    --border: 0.88 0.03 70;
+    --input: 0.88 0.03 70;
+    --ring: 0.38 0.07 45;
+
+    --radius: 0.75rem;
+
+    --chart-1: 0.55 0.12 45;
+    --chart-2: 0.65 0.1 60;
+    --chart-3: 0.75 0.08 75;
+    --chart-4: 0.4 0.08 35;
+    --chart-5: 0.7 0.14 55;
+
+    --sidebar: 0.95 0.015 75;
+    --sidebar-foreground: 0.22 0.04 40;
+    --sidebar-primary: 0.38 0.07 45;
+    --sidebar-primary-foreground: 0.97 0.01 80;
+    --sidebar-accent: 0.93 0.025 80;
+    --sidebar-accent-foreground: 0.38 0.07 45;
+    --sidebar-border: 0.88 0.03 70;
+    --sidebar-ring: 0.38 0.07 45;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Playfair Display", serif;
+  }
+
+  .font-body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  .text-shadow-warm {
+    text-shadow: 0 2px 20px rgba(120, 60, 20, 0.4);
+  }
+
+  .glass-dark {
+    background: rgba(22, 10, 5, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .choco-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.28 0.06 40) 0%,
+      oklch(0.18 0.04 35) 100%
+    );
+  }
+
+  .cream-gradient {
+    background: linear-gradient(
+      160deg,
+      oklch(0.97 0.012 80) 0%,
+      oklch(0.93 0.025 70) 100%
+    );
+  }
+
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Scroll animation classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stagger-1 {
+  transition-delay: 0.1s;
+}
+.stagger-2 {
+  transition-delay: 0.2s;
+}
+.stagger-3 {
+  transition-delay: 0.3s;
+}
+.stagger-4 {
+  transition-delay: 0.4s;
+}
+.stagger-5 {
+  transition-delay: 0.5s;
+}
+.stagger-6 {
+  transition-delay: 0.6s;
+}
+
+/* Scroll indicator */
+@keyframes bounce-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-down {
+  animation: bounce-down 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
